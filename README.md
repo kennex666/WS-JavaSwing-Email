@@ -22,7 +22,9 @@ Tìm file tại thư mục ``src/main/java/data/script.sql``
 
     Sau khi nhấn lưu bản nháp, dữ liệu sẽ được lưu vào database có trạng thái BAN_NHAP
 
-4. Hiện thực chức năng chỉnh sửa: 
+4. Hiện thực chức năng chỉnh sửa:
+
     Email sẽ được load sang Compose an email
+   
     Vô hiệu hoá nút Chỉnh sửa email nếu email có trạng thái BAN_NHAP
 
