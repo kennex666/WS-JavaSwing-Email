@@ -19,10 +19,10 @@ INSERT INTO [dbo].[email]
            ,[body]
            ,[status])
      VALUES
-           ('core-team-members@iuhgdsc'
-           ,'all-members@iuhgdsc'
-           ,'[IUH GDSC] Workshop Java Swing: Lời cảm ơn'
-           ,'Hi,  Thật tuyệt vời vì được nhìn thấy rằng bạn vẫn đang ở đây cùng chúng tôi.  Nếu có bất kì câu hỏi nào, bạn có thể nhắn trong Discord hoặc đặt câu hỏi trực tiếp tại Workshop nhé!!  >> iuhgdsc.github.io/?l=discord'
-           ,'BAN_NHAP')
+           (N'core-team-members@iuhgdsc'
+           ,N'all-members@iuhgdsc'
+           ,N'[IUH GDSC] Workshop Java Swing: Lời cảm ơn'
+           ,N'Hi,  Thật tuyệt vời vì được nhìn thấy rằng bạn vẫn đang ở đây cùng chúng tôi.  Nếu có bất kì câu hỏi nào, bạn có thể nhắn trong Discord hoặc đặt câu hỏi trực tiếp tại Workshop nhé!!  >> iuhgdsc.github.io/?l=discord'
+           ,N'BAN_NHAP')
 GO
 
