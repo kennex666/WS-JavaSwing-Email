@@ -6,7 +6,18 @@ package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
+import entities.Email;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -20,7 +31,7 @@ import utilities.EmailUtils;
  *
  * @author duong
  */
-public class JFrame_Java extends javax.swing.JFrame {
+public class JFrame_Java extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form JFrame_Java
@@ -37,7 +48,7 @@ public class JFrame_Java extends javax.swing.JFrame {
         
         setSize(700, 500);
         
-        setTitle("Java Swing: Demo Compose an Email | IUH GDSC");
+        setTitle("Java Swing: Demo Compose an Email | Google Developer Student Clubs - IUH");
         
         setLocationRelativeTo(null);
         
@@ -45,6 +56,12 @@ public class JFrame_Java extends javax.swing.JFrame {
         jLabel3.setPreferredSize(lblSubject.getPreferredSize());
         
         lblNewMessage.setFont(new Font("Arial", Font.BOLD, 14));
+        
+        btnSend.addActionListener(this);
+        btnCancel.addActionListener(this);
+        btnLoadDraft.addActionListener(this);
+        btnSaveDraft.addActionListener(this);
+
     }
 
     /**
@@ -62,7 +79,7 @@ public class JFrame_Java extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtFrom = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtTo = new javax.swing.JTextField();
@@ -73,9 +90,10 @@ public class JFrame_Java extends javax.swing.JFrame {
         lblNewMessage = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSend = new javax.swing.JButton();
+        btnSaveDraft = new javax.swing.JButton();
+        btnLoadDraft = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaContent = new javax.swing.JTextArea();
@@ -96,13 +114,13 @@ public class JFrame_Java extends javax.swing.JFrame {
         jLabel3.setText("From:");
         jPanel6.add(jLabel3);
 
-        jTextField2.setText("core-team-members@iuhgdsc");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtFrom.setText("core-team-members@iuhgdsc");
+        txtFrom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtFromActionPerformed(evt);
             }
         });
-        jPanel6.add(jTextField2);
+        jPanel6.add(txtFrom);
 
         jPanel5.add(jPanel6);
 
@@ -119,7 +137,7 @@ public class JFrame_Java extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(42, 16));
         jPanel1.add(jLabel2);
 
-        txtTo.setText("duongthaibao.job@googlemail.com");
+        txtTo.setText("all-members@iuhgdsc");
         txtTo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtToActionPerformed(evt);
@@ -173,19 +191,32 @@ public class JFrame_Java extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText("Gửi");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSend.setText("Gửi");
+        btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSendActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1);
+        jPanel3.add(btnSend);
 
-        jButton2.setText("Đính kèm tệp");
-        jPanel3.add(jButton2);
+        btnSaveDraft.setText("Lưu bản nháp");
+        btnSaveDraft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveDraftActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnSaveDraft);
 
-        jButton3.setText("Huỷ bỏ");
-        jPanel3.add(jButton3);
+        btnLoadDraft.setText("Load bản nháp");
+        btnLoadDraft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadDraftActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnLoadDraft);
+
+        btnCancel.setText("Huỷ bỏ");
+        jPanel3.add(btnCancel);
 
         jPanel4.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
@@ -221,46 +252,38 @@ public class JFrame_Java extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtToActionPerformed
-        // TODO add your handling code here:
+
+    
+    
+    
     }//GEN-LAST:event_txtToActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void txtFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFromActionPerformed
+
+    
+    
+    }//GEN-LAST:event_txtFromActionPerformed
 
     private void txtSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubjectActionPerformed
-        // TODO add your handling code here:
+
+    
+    
     }//GEN-LAST:event_txtSubjectActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-       
-        if (txtTo.getText().isBlank()){
-            JOptionPane.showMessageDialog(null, "Trường email không được để trống!", "Thông tin", JOptionPane.OK_OPTION);
-            txtTo.requestFocus();
-            return;
-        }
-        if (txtSubject.getText().isBlank()){
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập subject", "Thông tin", JOptionPane.OK_OPTION);
-            txtSubject.requestFocus();
-            return;
-        } 
-        
-        if (txtAreaContent.getText().isBlank()){
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập nội dung email trước khi gửi!", "Thông tin", JOptionPane.OK_OPTION);
-            txtAreaContent.requestFocus();
-            return;
-        }
-        
-        try {
-            EmailUtils.sendEmail(txtTo.getText().trim(), txtSubject.getText().trim(), txtAreaContent.getText());
-            JOptionPane.showMessageDialog(null, "Đã gửi email đến " + txtTo.getText());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Đã xảy ra sự cố", JOptionPane.OK_OPTION);
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+      
+      
+    }//GEN-LAST:event_btnSendActionPerformed
+
+    private void btnLoadDraftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadDraftActionPerformed
+   
+    
+    }//GEN-LAST:event_btnLoadDraftActionPerformed
+
+    private void btnSaveDraftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveDraftActionPerformed
+
+    
+    }//GEN-LAST:event_btnSaveDraftActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,11 +318,74 @@ public class JFrame_Java extends javax.swing.JFrame {
             }
         });
     }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    	// TODO Auto-generated method stub
+    	
+    	// Lấy nguồn gốc sự kiện
+    	Object source = e.getSource();
+    	
+    	// Xử lý sự kiện trên nút tương ứng
+    	if (source.equals(btnSend)) {
+    		
+    		if (txtFrom.getText().isBlank())
+    		    JOptionPane.showMessageDialog(this, "Vui lòng nhập email người gửi!");
+    		
+    		else if (txtTo.getText().isBlank())
+    			JOptionPane.showMessageDialog(this, "Vui lòng nhập email người nhận!");
+    		else if (txtSubject.getText().isBlank())
+    			JOptionPane.showMessageDialog(this, "Vui lòng nhập chủ đề!");
+    		else if (txtAreaContent.getText().isBlank())
+    			JOptionPane.showMessageDialog(this, "Vui lòng nhập nội dung!");
+
+    		
+		} else if (source.equals(btnCancel)) {
+			txtFrom.setText("");
+			txtTo.setText("");
+			txtSubject.setText("");
+			txtAreaContent.setText("");
+		} else if (source.equals(btnSaveDraft)) {
+			try {
+				FileOutputStream fos = new FileOutputStream("draft.ser");
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				
+				Email em = new Email(0, txtFrom.getText(), txtTo.getText(), txtSubject.getText(), txtAreaContent.getText(), "");
+				oos.writeObject(em);
+				oos.close();
+				fos.close();
+				JOptionPane.showMessageDialog(this, "Lưu bản nháp thành công!");
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} else if (source.equals(btnLoadDraft)) {
+			try {
+				
+				FileInputStream fis = new FileInputStream("draft.ser");
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				Email em = (Email) ois.readObject();
+				
+				txtFrom.setText(em.getFrom());
+				txtTo.setText(em.getTo());
+				txtSubject.setText(em.getSubject());
+				txtAreaContent.setText(em.getContent());
+				ois.close();
+				fis.close();
+				JOptionPane.showMessageDialog(this, "Đã load bản nháp!");
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+    	
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnLoadDraft;
+    private javax.swing.JButton btnSaveDraft;
+    private javax.swing.JButton btnSend;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -312,11 +398,11 @@ public class JFrame_Java extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblNewMessage;
     private javax.swing.JLabel lblSubject;
     private javax.swing.JPanel panelNorth;
     private javax.swing.JTextArea txtAreaContent;
+    private javax.swing.JTextField txtFrom;
     private javax.swing.JTextField txtSubject;
     private javax.swing.JTextField txtTo;
     // End of variables declaration//GEN-END:variables

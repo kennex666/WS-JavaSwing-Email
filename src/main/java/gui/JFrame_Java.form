@@ -57,12 +57,12 @@
                         <Property name="text" type="java.lang.String" value="From:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField2">
+                    <Component class="javax.swing.JTextField" name="txtFrom">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="core-team-members@iuhgdsc"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFromActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -88,7 +88,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="duongthaibao.job@googlemail.com"/>
+                    <Property name="text" type="java.lang.String" value="all-members@iuhgdsc"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtToActionPerformed"/>
@@ -545,20 +545,31 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="btnSend">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="G&#x1eed;i"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSendActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="btnSaveDraft">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x110;&#xed;nh k&#xe8;m t&#x1ec7;p"/>
+                    <Property name="text" type="java.lang.String" value="L&#x1b0;u b&#x1ea3;n nh&#xe1;p"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveDraftActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton3">
+                <Component class="javax.swing.JButton" name="btnLoadDraft">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Load b&#x1ea3;n nh&#xe1;p"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoadDraftActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnCancel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Hu&#x1ef7; b&#x1ecf;"/>
                   </Properties>
